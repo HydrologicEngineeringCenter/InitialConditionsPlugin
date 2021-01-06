@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-package initialConditionsPlugin;
 import com.rma.client.Browser;
 import com.rma.io.DssFileManagerImpl;
 import com.rma.io.RmaFile;
@@ -49,6 +48,7 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
     @Override
     public boolean saveData(RmaFile file){
         if(file!=null){
+            //used to be sElement
             Element root = new Element(DocumentRoot);
             root.setAttribute(AlternativeNameAttribute,getName());
             root.setAttribute(AlternativeDescriptionAttribute,getDescription());

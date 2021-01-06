@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 
-package initialConditionsPlugin;
-
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 

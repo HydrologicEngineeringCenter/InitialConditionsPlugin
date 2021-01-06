@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package initialConditionsPlugin;
+
 import com.rma.factories.NewObjectFactory;
 import hec.data.Parameter;
 import hec.model.OutputVariable;
@@ -23,7 +23,6 @@ import hec2.wat.plugin.CreatableWatPlugin;
 import hec2.wat.plugin.HydrologicEventPlugin;
 import hec2.wat.plugin.WatPluginManager;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 /**
  *

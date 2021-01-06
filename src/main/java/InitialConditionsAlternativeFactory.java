@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-package initialConditionsPlugin;
 import com.rma.factories.NewObjectFactory;
 import com.rma.factories.AbstractNewObjectFactory;
 import com.rma.io.FileManagerImpl;
