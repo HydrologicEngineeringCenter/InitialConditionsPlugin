@@ -36,6 +36,7 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
     private double _initialPool;
     private double _initialFlow;
     private double _minFlow = 600;
+    private RASReservoir[] _reservoirs;
     private String _uFilePath = "/ras/Russian_River_at_Cloverdale.u02";
     public InitialConditionsAlternative(){
         super();
@@ -101,6 +102,9 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
             return _dataLocations;
         }
 	
+    }
+    private void DefaultReservoirs(){
+        _reservoirs = new RASReservoir[6];
     }
     private List<DataLocation> defaultDataLocations(){
        	if(!_dataLocations.isEmpty()){
