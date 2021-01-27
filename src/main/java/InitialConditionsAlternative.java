@@ -37,7 +37,7 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
     private double _initialFlow;
     private double _minFlow = 600;
     private RASReservoir[] _reservoirs;
-    private String _uFilePath = "/ras/Russian_River_at_Cloverdale.u02";
+    private String _uFilePath = "/ras/RayRoberts.u03";
     public InitialConditionsAlternative(){
         super();
         _dataLocations = new ArrayList<>();
@@ -45,6 +45,7 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
     public InitialConditionsAlternative(String name){
         this();
         setName(name);
+        buildDefaultReservoirs();
     }
     @Override
     public boolean saveData(RmaFile file){
@@ -103,8 +104,9 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
         }
 	
     }
-    private void DefaultReservoirs(){
+    private void buildDefaultReservoirs(){
         _reservoirs = new RASReservoir[6];
+        _reservoirs[0] = new RASReservoir("Clear_Fork      ,Clear_Fork      ,60.4808", "BenBrooke Lake", 300 );
     }
     private List<DataLocation> defaultDataLocations(){
        	if(!_dataLocations.isEmpty()){
@@ -114,10 +116,11 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
         //create datalocations for each location of intrest for trinity, so that it can be linked to output from other models.
         
         //pool inflows - this is the two locations to link in the Model Linking Editor.
-        DataLocation poolElevationLoc = new DataLocation(this.getModelAlt(),"LAKE MENDOCINO-POOL","ELEV");
-        dlList.add(poolElevationLoc);
-        DataLocation initialFlowLoc = new DataLocation(this.getModelAlt(),"LAKE MENDOCINO-POOL","FLOW-OUT");
-        dlList.add(initialFlowLoc);
+        for(RASReservoir r: _reservoirs){
+            dlList.add(new DataLocation(this.getModelAlt(),r.get_ResSimName(),"ELEV"));
+            dlList.add(new DataLocation(this.getModelAlt(),r.get_ResSimName(),"FLOW-OUT"));
+        }
+
 	return dlList; 
     }
     public boolean setDataLocations(List<DataLocation> dataLocations){
@@ -166,7 +169,8 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
         if(_computeOptions instanceof hec2.wat.model.ComputeOptions){
             boolean returnValue = true;
             hec2.wat.model.ComputeOptions wco = (hec2.wat.model.ComputeOptions)_computeOptions;
-            if(!wco.isFrmCompute()){ return false;} 
+            if(!wco.isFrmCompute()){ return false;}
+            hec.model.RunTimeWindow rtw = wco.getRunTimeWindow(); //USe this to identfiy range to pull from timeseries.
             //stochastic
             WatFrame fr = null;
             fr = hec2.wat.WAT.getWatFrame();
@@ -174,19 +178,25 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
             // gather the required values from ResSim
             String dssFilePath = wco.getDssFilename();
             for(DataLocation dl : _dataLocations){
+                RASReservoir resPointer = null;
+                for(RASReservoir r: _reservoirs){
+                    if(r.get_ResSimName().equals(dl.getName())){
+                        resPointer = r;
+                    }
+                }
             //read input data source
                 String dssPath = dl.getLinkedToLocation().getDssPath();
                 TimeSeriesContainer tsc = ReadTimeSeries(dssFilePath,dssPath,wco.isFrmCompute());
                 if("ELEV".equals(dl.getParameter())){//this was my bug, i had dl.getParameter()=="ELEV" - which is object reference equals, not character equals...
                     //elevation - when comparing strings, always use .equals() unless you want to know they are the same exact memory pointer.
-                    _initialPool =  tsc.values[0];
-                    //fr.addMessage("Initial pool found as " + _initialPool);
+                    resPointer.set_initialPool(tsc.values[0]); // We need to check this reflects the TWM *************
+
                 }else{
                     //not elevation... must be Flow-out...
-                    _initialFlow = tsc.values[0];
-                    if(_initialFlow < _minFlow) _initialFlow = _minFlow;
-                    //fr.addMessage("Parameter is " + dl.getParameter());
-                    //fr.addMessage("Initial flow found as " + _initialFlow);
+                    double initialFlow = tsc.values[0];
+                    if(initialFlow < resPointer.get_minFlow()) initialFlow = resPointer.get_minFlow();
+                    resPointer.set_initialFlow(initialFlow);
+
                 }
             }
             //write output data to RAS file. 
