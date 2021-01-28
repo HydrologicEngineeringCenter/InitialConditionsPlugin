@@ -211,7 +211,7 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
              //define RAS ufile path..
             String uFile = dir + _uFilePath;
 
-            RAS_UNSTEADY_READER r = new RAS_UNSTEADY_READER(uFile, _reservoirs);
+            RAS_UNSTEADY_READER r = new RAS_UNSTEADY_READER(uFile,uFile,_reservoirs);
             returnValue = r.updateFile();
             return returnValue;
         }
