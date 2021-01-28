@@ -9,7 +9,7 @@ import org.apache.commons.io.FileUtils;
 class RAS_UNSTEADY_READERTest {
     private RASReservoir[] _reservoirs;
     @Test
-    void updateFileReturnsAFile() {
+    void updateFileReturnsDesiredFile() {
         _reservoirs = new RASReservoir[6];
         _reservoirs[0] = new RASReservoir(new RASName("Clear_Fork      ","Clear_Fork      ", "60.4808 ", "Benbrook Lake   "), "BenBrooke Lake", 300 );
         _reservoirs[1] = new RASReservoir(new RASName("Denton_Creek    ","DC              ", "11.5    ", "Grapevine       "), "BenBrooke Lake", 300 );
