@@ -73,6 +73,18 @@ public class RAS_UNSTEADY_READER {
                                 }
                             }
                         }
+                        else if( tmp[0].equals("Initial RRR Elev")){
+                            String[] vals = tmp[1].split(",");
+                            for (RASReservoir reservoir : _RASReservoirArray) {
+                                if ( vals[0].equals(reservoir.get_RASname().get_river()) &&
+                                vals[1].equals(reservoir.get_RASname().get_ReservoirName())){
+                                    String newElevLine = tmp[0] + "=" + vals[0] + "," + vals[1];
+                                    newElevLine += "," + reservoir.get_initialPool();
+                                    newUFile += newElevLine + "\r\n";
+                                }
+                            }
+
+                        }
                         else{
                             newUFile += uFileLine + "\r\n";
                         }
@@ -91,7 +103,6 @@ public class RAS_UNSTEADY_READER {
                     }
                 }
             }
-
         //write out newUFile.
         BufferedWriter bw = null;
         boolean ret = true;
