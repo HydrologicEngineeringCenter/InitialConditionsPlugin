@@ -106,7 +106,13 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
     }
     private void buildDefaultReservoirs(){
         _reservoirs = new RASReservoir[6];
-        _reservoirs[0] = new RASReservoir("Clear_Fork      ,Clear_Fork      ,60.4808", "BenBrooke Lake", 300 );
+        _reservoirs[0] = new RASReservoir(new RASName("Clear_Fork      ","Clear_Fork      ", "60.4808 ", "Benbrook Lake   "), "BenBrooke Lake", 300 );
+        _reservoirs[1] = new RASReservoir(new RASName("Denton_Creek    ","DC              ", "11.5    ", "Grapevine       "), "BenBrooke Lake", 300 );
+        _reservoirs[2] = new RASReservoir(new RASName("Elm Fork        ","Upper           ", "59.0    ", "Ray Roberts Lake"), "BenBrooke Lake", 300 );
+        _reservoirs[3] = new RASReservoir(new RASName("Mountain_Creek  ","Joe_Pool        ", "12.038  ", "Joe_Pool        "), "BenBrooke Lake", 300 );
+        _reservoirs[4] = new RASReservoir(new RASName("Elm Fork        ","Upper           ", "30.00   ", "30.100  "), "BenBrooke Lake", 300 );
+        _reservoirs[5] = new RASReservoir(new RASName("Mountain_Creek  ","Joe_Pool        ", "4.267   ", "4.284   "), "BenBrooke Lake", 300 );
+
     }
     private List<DataLocation> defaultDataLocations(){
        	if(!_dataLocations.isEmpty()){
@@ -204,7 +210,8 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
             String dir = proj.getProjectDirectory();
              //define RAS ufile path..
             String uFile = dir + _uFilePath;
-            RAS_UNSTEADY_READER r = new RAS_UNSTEADY_READER(uFile,_initialPool,_initialFlow);
+
+            RAS_UNSTEADY_READER r = new RAS_UNSTEADY_READER(uFile, _reservoirs);
             returnValue = r.updateFile();
             return returnValue;
         }

@@ -4,7 +4,7 @@ public class RASReservoir {
     private double _initialPool;
     private double _initialFlow;
     private double _minFlow;
-    private String _RASname;
+    private RASName _RASname;
     private String _ResSimName;
 
     public double get_initialPool() {
@@ -19,7 +19,7 @@ public class RASReservoir {
         return _minFlow;
     }
 
-    public String get_RASname() {
+    public RASName get_RASname() {
         return _RASname;
     }
 
@@ -35,7 +35,7 @@ public class RASReservoir {
         this._initialFlow = _initialFlow;
     }
 
-    RASReservoir(String RASName, String ResSimName, double minFlow ){
+    RASReservoir(RASName RASName, String ResSimName, double minFlow ){
         _minFlow = minFlow;
         _RASname = RASName;
         _ResSimName = ResSimName;
