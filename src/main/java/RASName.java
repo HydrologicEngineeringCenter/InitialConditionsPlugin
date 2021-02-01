@@ -3,7 +3,7 @@ public class RASName {
     private String _river;
     private String _reach;
     private String _XS;
-    private String _SAName;
+    private String _reservoirName;
 
     public String get_river() {
         return _river;
@@ -18,14 +18,14 @@ public class RASName {
     }
 
     public String get_ReservoirName() {
-        return _SAName;
+        return _reservoirName;
     }
 
-    public RASName(String _river, String _reach, String _XS, String _SAName) {
+    public RASName(String _river, String _reach, String _XS, String _reservoirName) {
         this._river = _river;
         this._reach = _reach;
         this._XS = _XS;
-        this._SAName = _SAName;
+        this._reservoirName = _reservoirName;
     }
 }
 
