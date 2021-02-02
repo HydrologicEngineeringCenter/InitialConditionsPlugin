@@ -60,7 +60,6 @@ distributions {
         }
     }
 }
-
 jar {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -69,25 +68,4 @@ jar {
     }
 }
 
-publishing {
-    publications {
-        ConfidenceBuilderArtifact(MavenPublication) {
-            from components.java
-            artifact distZip
 
-        }
-    }
-    repositories {
-        maven {
-            credentials {
-                username = "$mavenUser"
-                password = "$mavenPassword"
-            }
-
-            def releasesRepoUrl = "https://www.hec.usace.army.mil/nexus/repository/maven-releases/"
-            def snapshotsRepoUrl = "https://www.hec.usace.army.mil/nexus/repository/maven-snapshots/"
-            url = version.endsWith("SNAPSHOT") ? snapshotsRepoUrl : releasesRepoUrl
-        }
-    }
-}
-publish.dependsOn jar
