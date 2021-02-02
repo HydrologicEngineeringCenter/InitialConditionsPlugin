@@ -23,6 +23,8 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build --debug
+    - name: Display the path
+      run: echo %PATH%
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.2
       with:
@@ -31,3 +33,4 @@ jobs:
         # A file, directory or wildcard pattern that describes what to upload
         path: InitialConditionsPlugin/build/libs/InitialConditionsPlugin.jar
         # The desired behavior if no files are found using the provided path.
+
