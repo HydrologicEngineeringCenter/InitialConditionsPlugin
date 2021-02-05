@@ -38,7 +38,7 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
     private double _initialFlow;
     private double _minFlow = 600;
     private RASReservoir[] _reservoirs;
-    private String _uFilePath = "/ras/RayRoberts.u03";
+    private String _uFilePath = "/ras/Trinity_WAT.u01";
     public InitialConditionsAlternative(){
         super();
         _dataLocations = new ArrayList<>();
@@ -92,8 +92,8 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
     }
     public List<DataLocation> getOutputDataLocations(){
        //construct output data locations 
-        List<DataLocation> ret = new ArrayList<>();
-	return ret;//defaultDataLocations();
+        //List<DataLocation> ret = new ArrayList<>();
+	return defaultDataLocations();
     }
     public List<DataLocation> getInputDataLocations(){
         //construct input data locations.
@@ -121,7 +121,6 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
         }
         List<DataLocation> dlList = new ArrayList<>();
         //create datalocations for each location of intrest for trinity, so that it can be linked to output from other models.
-        
         //pool inflows - this is the two locations to link in the Model Linking Editor.
         for(RASReservoir r: _reservoirs){
             dlList.add(new DataLocation(this.getModelAlt(),r.get_ResSimName(),"ELEV"));
@@ -198,11 +197,20 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
                 TimeSeriesContainer tsc = ReadTimeSeries(dssFilePath,dssPath,wco.isFrmCompute());
                 if("ELEV".equals(dl.getParameter())){//this was my bug, i had dl.getParameter()=="ELEV" - which is object reference equals, not character equals...
                     //elevation - when comparing strings, always use .equals() unless you want to know they are the same exact memory pointer.
-                    resPointer.set_initialPool(tsc.getValue(firstTimestep)); // We need to check this reflects the TWM *************
+                    double myInitialPool = tsc.getValue(firstTimestep);
+                    while(myInitialPool < 0){
+                        firstTimestep.addHours(1);
+                        myInitialPool = tsc.getValue(firstTimestep);
+                    }
+                    resPointer.set_initialPool(myInitialPool); // We need to check this reflects the TWM *************
 
                 }else{
                     //not elevation... must be Flow-out...
                     double initialFlow = tsc.values[0];
+                    while(initialFlow < 0){
+                        firstTimestep.addHours(1);
+                        initialFlow = tsc.getValue(firstTimestep);
+                    }
                     if(initialFlow < resPointer.get_minFlow()) initialFlow = resPointer.get_minFlow();
                     resPointer.set_initialFlow(initialFlow);
 
