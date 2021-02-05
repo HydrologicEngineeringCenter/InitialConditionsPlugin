@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
  * @author WatPowerUser
  */
 public class InititalConditionsPluginI18n extends I18n{
-    public static final String BUNDLE_NAME = "initialConditionsPlugin.InititalConditionsPluginProperties";
+    public static final String BUNDLE_NAME = "InititalConditionsPluginProperties";
     private static final ResourceBundle SAMPLE_RESOURCE_BUNDLE;
     private ResourceBundle _resourceBundle;
     static
