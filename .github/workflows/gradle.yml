@@ -10,7 +10,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build and upload artifact:
+  build_and_upload_artifact:
     runs-on: windows-latest
 
     steps:
