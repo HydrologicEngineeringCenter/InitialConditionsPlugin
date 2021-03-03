@@ -107,12 +107,12 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
     }
     private void buildDefaultReservoirs(){
         _reservoirs = new RASReservoir[6];
-        _reservoirs[0] = new RASReservoir(new RASName("Clear_Fork      ","Clear_Fork      ", "60.4808 ", "Benbrook Lake   "), "BENBROOK-POOL", 300 );
-        _reservoirs[1] = new RASReservoir(new RASName("Denton Creek    ","Denton Creek    ", "11.3748 ", "Grapevine       "), "GRAPEVINE-POOL", 300 );
-        _reservoirs[2] = new RASReservoir(new RASName("Elm Fork        ","Upper           ", "59.0    ", "Ray Roberts Lake"), "RAY ROBERTS-POOL", 300 );
-        _reservoirs[3] = new RASReservoir(new RASName("Mountain_Creek  ","Joe_Pool        ", "12.038  ", "Joe_Pool        "), "JOE POOL-POOL", 300 );
-        _reservoirs[4] = new RASReservoir(new RASName("Elm Fork        ","Upper           ", "30.00   ", "30.100  "), "LEWISVILLE-POOL", 300 );
-        _reservoirs[5] = new RASReservoir(new RASName("Mountain_Creek  ","Joe_Pool        ", "4.267   ", "4.284   "), "MOUNTAIN CREEK-POOL", 300 );
+        _reservoirs[0] = new RASReservoir(new RASName("Clear_Fork      ","Clear_Fork      ", "60.4808 ", "Benbrook Lake   "), "BENBROOK-POOL", 600 );
+        _reservoirs[1] = new RASReservoir(new RASName("Denton Creek    ","Denton Creek    ", "11.3748 ", "Grapevine       "), "GRAPEVINE-POOL", 600 );
+        _reservoirs[2] = new RASReservoir(new RASName("Elm Fork        ","Upper           ", "59      ", "Ray Roberts Lake"), "RAY ROBERTS-POOL", 600 );
+        _reservoirs[3] = new RASReservoir(new RASName("Mountain_Creek  ","Joe_Pool        ", "12.038  ", "Joe_Pool        "), "JOE POOL-POOL", 600 );
+        _reservoirs[4] = new RASReservoir(new RASName("Elm Fork        ","Upper           ", "30.00   ", "30.100  "), "LEWISVILLE-POOL", 600 );
+        _reservoirs[5] = new RASReservoir(new RASName("Mountain_Creek  ","Joe_Pool        ", "4.267   ", "4.284   "), "MOUNTAIN CREEK-POOL", 600 );
 
     }
     private List<DataLocation> defaultDataLocations(){
