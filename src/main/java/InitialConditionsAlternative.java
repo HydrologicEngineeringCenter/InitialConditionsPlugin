@@ -38,7 +38,7 @@ public class InitialConditionsAlternative extends SelfContainedPluginAlt{
     private double _initialFlow;
     private double _minFlow = 600;
     private RASReservoir[] _reservoirs;
-    private String _uFilePath = "/ras/Trinity_WAT.u06";
+    private String _uFilePath = "/ras/Grapevine_TX00005.u19";
     public InitialConditionsAlternative(){
         super();
         _dataLocations = new ArrayList<>();
