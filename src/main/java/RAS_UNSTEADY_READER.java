@@ -49,7 +49,7 @@ public class RAS_UNSTEADY_READER {
                             for(RASReservoir reservoir: _RASReservoirArray) {
                                 if (vals[0].equals(reservoir.get_RASname().get_river()) &&
                                         vals[1].equals(reservoir.get_RASname().get_reach()) &&
-                                        vals[2].equals(reservoir.get_RASname().get_XS())) {
+                                        vals[2].equals(reservoir.get_RASname().get_STA())) {
                                     String newLocLine = tmp[0] + "=" + vals[0] +","+vals[1]+","+vals[2];
                                     newLocLine += "," + reservoir.get_initialFlow();
                                     newUFile += newLocLine + "\r\n";
@@ -72,7 +72,7 @@ public class RAS_UNSTEADY_READER {
                             for (RASReservoir reservoir : _RASReservoirArray) {
                                 if ( vals[0].equals(reservoir.get_RASname().get_river()) &&
                                         vals[1].equals(reservoir.get_RASname().get_reach())&&
-                                        vals[2].equals(reservoir.get_RASname().get_ReservoirName())){
+                                        vals[2].equals(reservoir.get_RASname().get_USXS())){
                                     String newElevLine = tmp[0] + "=" + vals[0] + "," + vals[1]+","+vals[2];
                                     newElevLine += "," + reservoir.get_initialPool();
                                     newUFile += newElevLine + "\r\n";
